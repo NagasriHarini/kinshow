@@ -76,7 +76,7 @@ export default function Navbar({ watchlistCount }) {
     <>
       <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav-inner">
-          <Link to="/" className="nav-logo"><span className="nav-logo-mark">KS</span><span className="nav-logo-text">Kinshow</span></Link>
+          <Link to="/" className="nav-logo"><span className="nav-logo-mark">K</span><span className="nav-logo-text">Kinshow</span></Link>
           <div className="nav-links">
             <Link to="/" className={`nav-link ${isActive('/') ? 'nav-link--active' : ''}`}>Home</Link>
             <Link to="/movies" className={`nav-link ${isActive('/movies') ? 'nav-link--active' : ''}`}>Movies</Link>
@@ -84,8 +84,10 @@ export default function Navbar({ watchlistCount }) {
             <Link to="/explore" className={`nav-link ${isActive('/explore') ? 'nav-link--active' : ''}`}>Explore</Link>
           </div>
           <div className="nav-actions">
-            <button className="nav-icon-btn" onClick={() => setSearchOpen(true)} aria-label="Search (press /)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <button className="nav-search" onClick={() => setSearchOpen(true)} aria-label="Search (press /)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <span>Search…</span>
+              <kbd>/</kbd>
             </button>
             <button className="nav-icon-btn" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
               {theme === 'dark' ? (
@@ -107,14 +109,6 @@ export default function Navbar({ watchlistCount }) {
         <Link to="/tv" className={`mobile-nav-item ${isActive('/tv') ? 'mobile-nav-item--active' : ''}`}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><path d="M17 2l-5 5-5-5"/></svg><span>TV</span></Link>
         <button className="mobile-nav-item" onClick={() => setSearchOpen(true)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span>Search</span></button>
         <Link to="/watchlist" className={`mobile-nav-item ${isActive('/watchlist') ? 'mobile-nav-item--active' : ''}`}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>My List</span></Link>
-        <button className="mobile-nav-item" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
-          {theme === 'dark' ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
-          ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          )}
-          <span>Theme</span>
-        </button>
       </div>
       {searchOpen && (
         <div className="search-overlay" onClick={(e) => { if (e.target === e.currentTarget) { setSearchOpen(false); setQuery(''); setResults([]); } }}>
