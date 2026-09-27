@@ -9,7 +9,6 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import TVShows from './pages/TVShows';
 import Watchlist from './pages/Watchlist';
-import Profile from './pages/Profile';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
@@ -82,7 +81,6 @@ function AppInner() {
             <Route path="/detail/:type/:id" element={<Detail />} />
             <Route path="/player" element={<Player />} />
             <Route path="/watchlist" element={<Watchlist />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
