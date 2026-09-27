@@ -60,13 +60,14 @@ function ScrollToTop() {
 
 function AppInner() {
   const { list } = useWatchlist();
+  const { pathname } = useLocation();
 
   return (
     <>
       <a className="skip-link" href="#content">Skip to main content</a>
       <Navbar watchlistCount={list.length} />
 
-      <ErrorBoundary>
+      <ErrorBoundary resetKey={pathname}>
         <Suspense
           fallback={
             <div className="content-rail">
