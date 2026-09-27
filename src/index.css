@@ -184,6 +184,38 @@ main#content {
   scroll-margin-top: var(--nav-h);
 }
 
+/* ERROR BOUNDARY */
+.error-card-wrap {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.error-card {
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--surface-active);
+}
+.error-card__title {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.error-card__text {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+.error-card__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ─── NAV ─────────────────────────────────── */
 .nav {
   position: fixed;
