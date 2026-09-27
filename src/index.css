@@ -2730,7 +2730,7 @@ main#content {
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  color: #fff;
+  color: var(--text);
   text-align: center;
 }
 
@@ -2740,7 +2740,7 @@ main#content {
   font-weight: 900;
   letter-spacing: -12px;
 
-  background: linear-gradient(135deg, #fd0101, #ed2828, #eb9595);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
 
   -webkit-background-clip: text;
   background-clip: text;
@@ -2767,7 +2767,7 @@ main#content {
   max-width: 520px;
   margin: 0 auto 32px;
 
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 17px;
   line-height: 1.7;
 }
