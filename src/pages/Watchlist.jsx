@@ -6,7 +6,7 @@ import { PosterImg } from '../utils/poster';
 import { SEO } from '../components/SEO';
 
 export default function Watchlist() {
-  const { list, remove } = useWatchlist();
+  const { list, remove, restore } = useWatchlist();
   const toast = useToast();
   const [filter, setFilter] = useState('all');
   const [sort, setSort] = useState('recent');
@@ -17,13 +17,20 @@ export default function Watchlist() {
     .sort((a, b) => sort === 'title' ? (a.title || '').localeCompare(b.title || '') : (b.added || 0) - (a.added || 0));
 
   const removeItem = (item) => {
+    const originalIndex = list.findIndex(i => i.id === item.id);
     setRemovingId(item.id);
     setTimeout(() => {
       remove(item.id); 
-      toast(`${item.title} removed from My List`);
+      toast(`${item.title} removed from My List`, {
+        duration: 5000,
+        action: {
+          label: 'Undo',
+          onClick: () => restore(item, originalIndex)
+        }
+      });
       setRemovingId(null);
     }, 300);
-};
+  };
 
   if (list.length === 0) {
     return (
