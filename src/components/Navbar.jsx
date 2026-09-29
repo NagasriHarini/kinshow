@@ -16,6 +16,12 @@ export default function Navbar({ watchlistCount }) {
   const navigate = useNavigate();
   const location = useLocation();
   const timerRef = useRef(null);
+  const [shortcutHint] = useState(() => {
+    if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+      return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent || '') ? '⌘K' : 'Ctrl+K';
+    }
+    return 'Ctrl+K';
+  });
 
   const loadSearchHistory = useCallback(() => {
     setSearchHistory(getSearchHistory());
@@ -51,8 +57,31 @@ export default function Navbar({ watchlistCount }) {
     }
   }, [searchOpen, loadSearchHistory]);
   useEffect(() => {
-    const h = (e) => { if (e.key === '/' && !searchOpen && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) { e.preventDefault(); setSearchOpen(true); } if (e.key === 'Escape') { setSearchOpen(false); setQuery(''); setResults([]); } };
-    window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h);
+    const h = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        if (e.repeat) return;
+        e.preventDefault();
+        if (searchOpen) {
+          setSearchOpen(false);
+          setQuery('');
+          setResults([]);
+        } else {
+          setSearchOpen(true);
+        }
+        return;
+      }
+      if (e.key === '/' && !searchOpen && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+        setQuery('');
+        setResults([]);
+      }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
   }, [searchOpen]);
 
   const search = useCallback((q) => {
@@ -84,10 +113,10 @@ export default function Navbar({ watchlistCount }) {
             <Link to="/explore" className={`nav-link ${isActive('/explore') ? 'nav-link--active' : ''}`}>Explore</Link>
           </div>
           <div className="nav-actions">
-            <button className="nav-search" onClick={() => setSearchOpen(true)} aria-label="Search (press /)">
+            <button className="nav-search" onClick={() => setSearchOpen(true)} aria-label={`Search (${shortcutHint})`}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               <span>Search…</span>
-              <kbd>/</kbd>
+              <kbd>{shortcutHint}</kbd>
             </button>
             <button className="nav-icon-btn" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
               {theme === 'dark' ? (
@@ -162,7 +191,7 @@ export default function Navbar({ watchlistCount }) {
                 ))}
               </div>
             )}
-            {!query && searchHistory.length === 0 && <div className="search-overlay-hint">Start typing to search... Press <kbd>/</kbd> to open anytime</div>}
+            {!query && searchHistory.length === 0 && <div className="search-overlay-hint">Start typing to search... Press <kbd>{shortcutHint}</kbd> to close</div>}
           </div>
         </div>
       )}
