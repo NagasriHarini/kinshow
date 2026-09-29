@@ -1935,12 +1935,13 @@ main#content {
 .player-ep-toggle--active { background: var(--surface-hover); color: var(--text); }
 
 .player-container {
-  width: calc(100% - 48px); max-width: 1352px; margin: 0 auto;
+  width: min(calc(100% - 48px), max(480px, calc((100vh - 252px) * 16 / 9)));
+  max-width: 1352px; margin: 0 auto;
   padding: 0;
   aspect-ratio: 16/9; border-radius: 0; overflow: hidden;
   background: black; position: relative;
 }
-.player-iframe { width: 100%; height: 100%; border: none; }
+.player-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 .player-click-shield { position: absolute; inset: 0; z-index: 5; cursor: pointer; background: transparent; }
 
 /* ─── EPISODE PICKER ──────────────────────── */
