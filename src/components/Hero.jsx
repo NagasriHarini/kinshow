@@ -90,6 +90,11 @@ export default function Hero() {
             )}
           </div>
           {overview && <p className="hero-desc">{overview.slice(0, 220)}{overview.length > 220 ? '...' : ''}</p>}
+        </div>
+        <button className="hero-poster" onClick={goTo} aria-label={`View details for ${title}`}>
+          {poster && <img src={poster} alt={`${title} poster`} className="hero-poster-img" />}
+        </button>
+        <div className="hero-cta" key={`cta-${idx}`}>
           <div className="hero-actions">
             <button className="btn btn--primary" onClick={goTo}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -118,9 +123,6 @@ export default function Hero() {
             </div>
           )}
         </div>
-        <button className="hero-poster" onClick={goTo} aria-label={`View details for ${title}`}>
-          {poster && <img src={poster} alt={`${title} poster`} className="hero-poster-img" />}
-        </button>
       </div>
     </section>
   );
