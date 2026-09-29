@@ -29,13 +29,18 @@ const SERVERS = [
     if (type === 'tv') return `https://vidfast.vc/tv/${imdbId}/${season || 1}/${episode || 1}`;
     return `https://vidfast.vc/movie/${imdbId}`;
   }},
+  { id: 'vidsrcru', name: 'VidSrc3', build: (type, imdbId, title, season, episode) => {
+    if (!imdbId) return '';
+    if (type === 'tv') return `https://vidsrc.ru/embed/tv/${imdbId}/${season || 1}/${episode || 1}`;
+    return `https://vidsrc.ru/embed/movie/${imdbId}`;
+  }},
 ];
 
 const SHORTCUTS = [
   { keys: '←', desc: 'Previous episode' },
   { keys: '→', desc: 'Next episode' },
   { keys: 'F', desc: 'Toggle fullscreen' },
-  { keys: '1–5', desc: 'Switch server' },
+  { keys: '1–6', desc: 'Switch server' },
   { keys: 'E', desc: 'Toggle episode picker' },
   { keys: '?', desc: 'Show keyboard shortcuts' },
   { keys: 'Esc', desc: 'Close panel / go back' },
@@ -164,7 +169,7 @@ export default function Player() {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); return; }
       if (e.key === 'e' || e.key === 'E') { if (s.loc?.type === 'tv') setPickerOpen(v => !v); return; }
-      if (e.key >= '1' && e.key <= '5') { switchServer(parseInt(e.key) - 1); return; }
+      if (e.key >= '1' && e.key <= '6') { switchServer(parseInt(e.key) - 1); return; }
       if (s.loc?.type === 'tv') {
         const sn = parseInt(s.loc.season) || 1;
         const ep = parseInt(s.loc.episode) || 1;
