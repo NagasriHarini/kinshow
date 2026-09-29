@@ -4,6 +4,11 @@ import { tvmazeEpisodes, tvmazeLookupByImdb, tvmazeSeasons } from '../api';
 import { SEO, StructuredData, videoSchema } from '../components/SEO';
 
 const SERVERS = [
+  { id: 'vidsrcru', name: 'VidSrc3', build: (type, imdbId, title, season, episode) => {
+    if (!imdbId) return '';
+    if (type === 'tv') return `https://vidsrc.ru/embed/tv/${imdbId}/${season || 1}/${episode || 1}`;
+    return `https://vidsrc.ru/embed/movie/${imdbId}`;
+  }},
   { id: 'vidsrc', name: 'VidSrc', build: (type, imdbId, title, season, episode) => {
     if (!imdbId) return '';
     if (type === 'tv') return `https://vidsrc2.ru/embed/tv/${imdbId}/${season || 1}/${episode || 1}`;
@@ -28,11 +33,6 @@ const SERVERS = [
     if (!imdbId) return '';
     if (type === 'tv') return `https://vidfast.vc/tv/${imdbId}/${season || 1}/${episode || 1}`;
     return `https://vidfast.vc/movie/${imdbId}`;
-  }},
-  { id: 'vidsrcru', name: 'VidSrc3', build: (type, imdbId, title, season, episode) => {
-    if (!imdbId) return '';
-    if (type === 'tv') return `https://vidsrc.ru/embed/tv/${imdbId}/${season || 1}/${episode || 1}`;
-    return `https://vidsrc.ru/embed/movie/${imdbId}`;
   }},
 ];
 
