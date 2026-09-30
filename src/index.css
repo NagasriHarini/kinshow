@@ -2403,7 +2403,7 @@ main#content {
 .toast-action:hover {
   background: var(--surface-active);
   border-color: var(--text-muted);
-  color: #fff;
+  color: var(--text);
 }
 .toast-action:focus-visible {
   outline: 2px solid var(--accent);
