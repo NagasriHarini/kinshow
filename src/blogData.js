@@ -1,5 +1,57 @@
 export const BLOG_POSTS = [
   {
+    slug: 'top-10-binge-worthy-series-october',
+    title: 'Top 10 Binge-Worthy Series to Watch This October',
+    excerpt: 'From the autumn woods of Over the Garden Wall to the Upside Down — ten atmospheric series to binge this October, ranked and linked straight to their pages on Kinshow.',
+    date: '2026-10-01',
+    author: 'Kinshow Editorial',
+    category: 'Lists',
+    readTime: '8 min',
+    content: `
+      <p>October is peak television season: the nights are longer, the lights are lower, and every show suddenly feels more atmospheric. We picked <strong>10 binge-worthy series</strong> that belong on your watch list this month — ranked, with links straight to their Kinshow pages so you can start watching in one click.</p>
+
+      <h2>The List</h2>
+      <ol>
+        <li>
+          <strong><a href="/detail/tv/1744">Over the Garden Wall</a></strong> (2014) — Ten episodes of pure autumn magic. Two brothers wander a mysterious woods filled with talking animals, witches, and a gravel-voiced woodsman. It is short enough to finish in one sitting and charming enough to rewatch every October. Rated 8.1 on TVmaze.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/2993">Stranger Things</a></strong> (2016) — The show that turned 1980s Hawkins, Indiana into a Halloween destination. Demogorgons, Eggo waffles, and a girl with psychokinetic powers — four seasons that still land as comfort viewing. Rated 8.4.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/29191">The Haunting of Hill House</a></strong> (2018) — Mike Flanagan's haunted-house masterpiece follows the Crane family across two timelines, where every background frame hides a ghost. The bent-neck lady reveal alone is worth the binge. Rated 8.3.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/53647">Wednesday</a></strong> (2022) — Jenna Ortega's deadpan Addams Family detective series at Nevermore Academy. Sharp, funny, and packed with Wednesday's viral dance scene. Rated 7.9.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/427">Buffy the Vampire Slayer</a></strong> (1997) — The foundational Halloween binge: seven seasons of Sunnydale slaying, high school metaphors, and some of TV's best ensemble chemistry. Rated 8.5.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/396">Gravity Falls</a></strong> (2012) — Twin siblings Dipper and Mabel uncover coded journals and summer-camp monsters in the weirdest town in Oregon. Family-friendly spookiness with a serialized mystery underneath. Rated 8.8 — the highest on this list.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/32649">Chilling Adventures of Sabrina</a></strong> (2018) — Kiernan Shipka's Sabrina Spellman splits her time between mortal high school and the Church of Night. Dark, gothic, and endlessly rewatchable. Rated 7.4.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/42840">Midnight Mass</a></strong> (2021) — Another Mike Flanagan entry: a fading island community gets a charismatic new priest, and something is very wrong with the revivals. Slow-burn horror that builds to an unforgettable finale. Rated 7.4.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/16">Penny Dreadful</a></strong> (2014) — Victor Frankenstein, Dorian Gray, and Dracula share a foggy Victorian London with Vanessa Ives and a werewolf gunslinger. Gorgeous, theatrical horror with a killer cast. Rated 8.2.
+        </li>
+        <li>
+          <strong><a href="/detail/tv/30">American Horror Story</a></strong> (2011) — The anthology that keeps reinventing itself: a murder house, an asylum, a coven, a hotel. Jump into any season that suits your mood — each one is a self-contained nightmare. Rated 7.4.
+        </li>
+      </ol>
+
+      <h2>Start Watching</h2>
+      <p>Every series above links directly to its Kinshow page with cast details, episode guides, and playback. When you finish the list, browse the full catalog on the <a href="/tv">TV Shows page</a> — and save anything you want to get to later with My List.</p>
+
+      <p>Happy binging — and happy Halloween season from <strong>Kinshow</strong>.</p>
+    `,
+    image: 'https://static.tvmaze.com/uploads/images/medium_portrait/221/554447.jpg'
+  },
+  {
     slug: 'best-movies-to-watch-right-now',
     title: 'Best Movies to Watch Right Now in 2026',
     excerpt: 'Looking for the best movies to watch right now? Here are our top picks across every genre, from action-packed blockbusters to heartfelt dramas.',
