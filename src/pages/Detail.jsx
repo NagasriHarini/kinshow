@@ -177,6 +177,10 @@ export default function Detail() {
   const posterUrl = data.poster || data.poster_path;
   const fallbackPoster = makePoster(title, y(data), r(data), title.charCodeAt(0));
   const itemId = isTv ? String(id) : (imdbId || String(id));
+  const movieTitle = (data?.title || data?.name || (title && title !== 'Untitled' ? title : '')).trim();
+  const trailerYear = y(data) && y(data) !== '—' ? String(y(data)).trim() : '';
+  const trailerQuery = [movieTitle, trailerYear, 'official trailer'].filter(Boolean).join(' ');
+  const trailerUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(trailerQuery)}`;
 
   const toggleWatchlist = () => {
     if (has(itemId)) {
@@ -234,6 +238,16 @@ export default function Detail() {
           <div className="detail-actions-mobile">
             <button className="btn btn--primary btn--block" onClick={playContent}>▶ Watch Now</button>
             <button className="btn btn--secondary btn--block" onClick={toggleWatchlist}>{has(itemId) ? '✓ In My List' : '+ Add to List'}</button>
+            {movieTitle && (
+              <a
+                href={trailerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost btn--block"
+              >
+                Watch trailer
+              </a>
+            )}
           </div>
         </div>
         <div className="detail-right">
@@ -257,6 +271,16 @@ export default function Detail() {
             <button className="btn btn--ghost" onClick={toggleWatchlist}>
               {has(itemId) ? '✓ In My List' : '+ Add to List'}
             </button>
+            {movieTitle && (
+              <a
+                href={trailerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost"
+              >
+                Watch trailer
+              </a>
+            )}
           </div>
           <div className="detail-meta">
             {data.director && data.director !== 'N/A' && <div className="detail-meta-row"><span className="detail-meta-label">Director</span><span className="detail-meta-value">{data.director}</span></div>}
