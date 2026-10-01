@@ -18,7 +18,8 @@ export default function Detail() {
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [seasonNum, setSeasonNum] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const isValidType = type === 'movie' || type === 'tv';
+  const [loading, setLoading] = useState(isValidType);
   const [recommended, setRecommended] = useState([]);
   const castScrollRef = useRef(null);
   const [showCastLeftFade, setShowCastLeftFade] = useState(false);
@@ -78,8 +79,15 @@ export default function Detail() {
   }, [data?.cast]);
 
   useEffect(() => {
-    setLoading(true); setData(null); setSeasons([]); setEpisodes([]);
+    setData(null); setSeasons([]); setEpisodes([]);
     window.scrollTo(0, 0);
+
+    if (type !== 'movie' && type !== 'tv') {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
 
     if (type === 'tv') {
       tvmazeShow(id).then(d => {
@@ -95,7 +103,7 @@ export default function Detail() {
         }
         setLoading(false);
       });
-    } else {
+    } else if (type === 'movie') {
       const movie = MOVIES.find(m => m.id === id || String(m.id) === String(id));
       if (movie) {
         setData({ ...movie, media_type: 'movie', cast: [], crew: [] });
