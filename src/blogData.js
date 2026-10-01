@@ -49,7 +49,7 @@ export const BLOG_POSTS = [
 
       <p>Happy binging — and happy Halloween season from <strong>Kinshow</strong>.</p>
     `,
-    image: 'https://static.tvmaze.com/uploads/images/medium_portrait/221/554447.jpg'
+    image: 'https://static.tvmaze.com/uploads/images/original_untouched/636/1591578.jpg'
   },
   {
     slug: 'best-movies-to-watch-right-now',
