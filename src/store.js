@@ -58,8 +58,20 @@ export function useWatchlist() {
   const [list, setList] = useLocalStorage('watchlist', []);
   const add = useCallback((item) => setList(p => p.some(i => i.id === item.id) ? p : [...p, { id: item.id, type: item.media_type || (item.title ? 'movie' : 'tv'), title: item.title || item.name, poster_path: item.poster_path, runtime: Number(item.runtime) || 0, added: Date.now() }]), [setList]);
   const remove = useCallback((id) => setList(p => p.filter(i => i.id !== id)), [setList]);
+  const restore = useCallback((item, index) => {
+    if (!item || item.id == null) return;
+    setList(p => {
+      if (p.some(i => i.id === item.id)) return p;
+      const next = [...p];
+      const targetIndex = typeof index === 'number' && Number.isInteger(index) && index >= 0 && index <= next.length
+        ? index
+        : next.length;
+      next.splice(targetIndex, 0, item);
+      return next;
+    });
+  }, [setList]);
   const has = useCallback((id) => list.some(i => i.id === id), [list]);
-  return { list, add, remove, has };
+  return { list, add, remove, restore, has };
 }
 
 export function useHistory() {

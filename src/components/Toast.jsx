@@ -1,14 +1,47 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 
 const Ctx = createContext();
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
-  const show = useCallback((msg, type = 'info') => {
-    const id = Date.now() + Math.random();
-    setToasts(p => [...p, { id, msg, type }]);
-    setTimeout(() => setToasts(p => p.filter(t => t.id !== id)), 2800);
+  const timersRef = useRef(new Map());
+
+  const dismiss = useCallback((id) => {
+    const timer = timersRef.current.get(id);
+    if (timer) {
+      clearTimeout(timer);
+      timersRef.current.delete(id);
+    }
+    setToasts(p => p.filter(t => t.id !== id));
   }, []);
+
+  const show = useCallback((msg, typeOrOptions = 'info', maybeOptions = {}) => {
+    const isOptionsObj = typeof typeOrOptions === 'object' && typeOrOptions !== null;
+    const options = isOptionsObj ? typeOrOptions : (maybeOptions || {});
+    const type = (typeof typeOrOptions === 'string' && typeOrOptions)
+      ? typeOrOptions
+      : (options.type || 'info');
+    const duration = typeof options.duration === 'number' ? options.duration : 2800;
+    const action = options.action;
+
+    const id = Date.now() + Math.random();
+    setToasts(p => [...p, { id, msg, type, action }]);
+
+    const timer = setTimeout(() => {
+      timersRef.current.delete(id);
+      setToasts(p => p.filter(t => t.id !== id));
+    }, duration);
+    timersRef.current.set(id, timer);
+  }, []);
+
+  useEffect(() => {
+    const timers = timersRef.current;
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+      timers.clear();
+    };
+  }, []);
+
   return (
     <Ctx.Provider value={show}>
       {children}
@@ -19,6 +52,21 @@ export function ToastProvider({ children }) {
               {t.type === 'success' ? '✓' : t.type === 'error' ? '✕' : 'ℹ'}
             </span>
             {t.msg}
+            {t.action && (
+              <button
+                type="button"
+                className="toast-action"
+                onClick={() => {
+                  try {
+                    t.action.onClick?.();
+                  } finally {
+                    dismiss(t.id);
+                  }
+                }}
+              >
+                {t.action.label}
+              </button>
+            )}
           </div>
         ))}
       </div>

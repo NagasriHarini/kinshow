@@ -2409,6 +2409,30 @@ main#content {
 .toast--error .toast-icon {
   color: var(--error);
 }
+.toast-action {
+  margin-left: auto;
+  padding: 3px 8px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  transition: all var(--duration) var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.toast-action:hover {
+  background: var(--surface-active);
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+.toast-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
 
 @media (max-width: 768px) {
   .toast-container {

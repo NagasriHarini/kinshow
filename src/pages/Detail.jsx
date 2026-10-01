@@ -23,7 +23,7 @@ export default function Detail() {
   const castScrollRef = useRef(null);
   const [showCastLeftFade, setShowCastLeftFade] = useState(false);
   const [showCastRightFade, setShowCastRightFade] = useState(false);
-  const { add, remove, has } = useWatchlist();
+  const { list, add, remove, restore, has } = useWatchlist();
   const { add: addHistory } = useHistory();
   const toast = useToast();
 
@@ -171,8 +171,25 @@ export default function Detail() {
   const itemId = isTv ? String(id) : (imdbId || String(id));
 
   const toggleWatchlist = () => {
-    if (has(itemId)) { remove(itemId); toast(`${title} removed from My List`); }
-    else { add({ id: itemId, media_type: type, title, poster_path: posterUrl || fallbackPoster, runtime: data.runtime }); toast(`${title} added to My List`, 'success'); }
+    if (has(itemId)) {
+      const originalIndex = list.findIndex(i => i.id === itemId || String(i.id) === String(itemId));
+      const originalItem = originalIndex !== -1 ? list[originalIndex] : null;
+      remove(itemId);
+      toast(`${title} removed from My List`, {
+        duration: 5000,
+        action: {
+          label: 'Undo',
+          onClick: () => {
+            if (originalItem) {
+              restore(originalItem, originalIndex);
+            }
+          }
+        }
+      });
+    } else {
+      add({ id: itemId, media_type: type, title, poster_path: posterUrl || fallbackPoster, runtime: data.runtime });
+      toast(`${title} added to My List`, 'success');
+    }
   };
 
   const playContent = () => {
